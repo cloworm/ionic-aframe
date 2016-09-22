@@ -1,0 +1,25 @@
+a-scene {
+  bottom: 49px;
+}
+
+.preview {
+  /*width: 90%;*/
+  width: auto;
+  display: block;
+  margin: 10px auto 10px auto;
+  height: 200px;
+}
+
+.gallery {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.dashboard {
+  color: #673ab7;
+  font-weight: 600;
+}
+
+.welcome {
+  height: 100%;
+}

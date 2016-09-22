@@ -1,0 +1,14 @@
+{
+  "name": "ionic-heroku",
+  "description": "Ionic Node.js Heroku app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "~4.4.3",
+    "path": "^0.12.7",
+    "pg": "^6.1.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.24.3",
+    "sequelize-cli": "^2.4.0"
+  }
+}
