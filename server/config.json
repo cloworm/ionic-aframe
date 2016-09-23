@@ -5,7 +5,10 @@
     "database": "ionic-aframe",
     "host": "127.0.0.1",
     "port": 5432,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "migrationStorage": "sequelize",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelizeData.json"
   },
   "test": {
     "username": "root",
