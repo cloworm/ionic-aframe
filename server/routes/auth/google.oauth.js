@@ -5,7 +5,9 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var models = require('../../models');
 var User = models.User;
-var secret = require('../../../secret.json');
+var envVar = require('../../env');
+
+console.log('env variables', envVar);
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
@@ -33,9 +35,9 @@ router.get('/callback', passport.authenticate('google', {
 }));
 
 passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID || secret.clientID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET || secret.clientSecret,
-  callbackURL: process.env.GOOGLE_CALLBACK_URL || secret.callbackURL
+  clientID: envVar.GOOGLE.clientID,
+  clientSecret: envVar.GOOGLE.clientSecret,
+  callbackURL: envVar.GOOGLE.callbackURL
 }, function (token, refreshToken, profile, done) {
   var info = {
     name: profile.displayName,
