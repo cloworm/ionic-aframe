@@ -25,6 +25,24 @@ angular.module('starter.services', [])
       .catch(function(err) {
         console.log(err);
       });
+    },
+    like: function(postId, body) {
+      return $http.post('/api/posts/' + postId + '/likes', body)
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    },
+    unlike: function(postId, userId) {
+      return $http.delete('/api/posts/' + postId + '/likes/' + userId)
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
     }
   };
 });

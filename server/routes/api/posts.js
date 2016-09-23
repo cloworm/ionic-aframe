@@ -32,11 +32,11 @@ router.post('/:id/likes', function(req, res, next) {
   .catch(next);
 });
 
-router.delete('/:id/likes', function(req, res, next) {
+router.delete('/:id/likes/:userId', function(req, res, next) {
   models.Like.findOne({
     where: {
       PostId: req.params.id,
-      UserId: req.body.userId
+      UserId: req.params.userId
     }
   })
   .then(function(like) {

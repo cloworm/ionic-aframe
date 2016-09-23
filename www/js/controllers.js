@@ -8,6 +8,28 @@ angular.module('starter.controllers', [])
   .then(function(friends) {
     $scope.friends = friends;
   });
+
+  $scope.liked = false;
+
+  $scope.toggleLike = function(postId, userId) {
+    if ($scope.liked) {
+      return Friends.unlike(postId, userId)
+      .then(function() {
+        $scope.liked = false;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    } else {
+      return Friends.like(postId, {userId: userId})
+      .then(function() {
+        $scope.liked = true;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    }
+  };
 })
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends, $sce) {
@@ -15,12 +37,11 @@ angular.module('starter.controllers', [])
   .then(function(friend) {
     $scope.friend = friend;
     $scope.url = friend.url;
-    console.log('friend', $scope.friend);
   });
 
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
-  }
+  };
 })
 
 .controller('AccountCtrl', function($scope) {
