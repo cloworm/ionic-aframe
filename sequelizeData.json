@@ -1,4 +1,6 @@
 [
   "20160923010649-seed-users.js",
-  "20160923011854-seed-posts.js"
+  "20160923011854-seed-posts.js",
+  "20160923210836-user-seedfile.js",
+  "20160923210909-post-seedfile.js"
 ]

@@ -28,12 +28,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
 
-  $stateProvider.state('upload', {
-    url: '/upload',
-    templateUrl: '/templates/upload.html',
-    controller: 'UploadCtrl'
-  });
-
   $stateProvider
 
     // setup an abstract state for the tabs directive
@@ -51,6 +45,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-dash': {
           templateUrl: 'templates/tab-dash.html',
           controller: 'DashCtrl'
+        }
+      }
+    })
+
+    .state('tab.upload', {
+      url: '/upload',
+      views: {
+        'tab-upload': {
+          templateUrl: 'templates/upload.html',
+          controller: 'UploadCtrl'
         }
       }
     })
