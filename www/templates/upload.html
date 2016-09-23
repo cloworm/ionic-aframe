@@ -1,0 +1,18 @@
+<ion-view title="Upload">
+  <ion-content class="padding">
+    <div class="list">
+      <label for="fileUpload">Choose an image</label>
+      <input ng-model="upload.file" class="inputfile" id="fileUpload" type="file" accept="image/*;capture=camera">
+      <label class="item item-input">
+        <span class="input-label">Title</span>
+        <input ng-model="upload.title" type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Description</span>
+        <input ng-model="upload.description" type="password">
+      </label>
+    </div>
+
+    <button ng-click="submit(upload)">Submit</button>
+  </ion-content>
+</ion-view>

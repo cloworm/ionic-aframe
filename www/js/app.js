@@ -27,13 +27,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+
+  $stateProvider.state('upload', {
+    url: '/upload',
+    templateUrl: '/templates/upload.html',
+    controller: 'UploadCtrl'
+  });
+
   $stateProvider
 
     // setup an abstract state for the tabs directive
     .state('tab', {
-      url: "/tab",
+      url: '/tab',
       abstract: true,
-      templateUrl: "templates/tabs.html"
+      templateUrl: 'templates/tabs.html'
     })
 
     // Each tab has its own nav history stack:

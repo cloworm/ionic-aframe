@@ -57,4 +57,8 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AccountCtrl', function($scope) {
+})
+
+.controller('UploadCtrl', function($scope) {
+
 });
