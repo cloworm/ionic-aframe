@@ -7,14 +7,14 @@
       <div class="list card" ng-repeat="friend in friends">
 
         <div class="item item-avatar">
-          <img src="{{friend.User.avatar}}">
+          <img ng-src="{{friend.User.avatar}}">
           <h2>{{friend.title}} by {{friend.User.username}}</h2>
           <p>{{friend.createdAt | date : mediumDate}}</p>
         </div>
 
         <div class="item item-body">
           <a href="#/tab/friend/{{friend.id}}">
-            <img class="full-image" src="{{friend.url}}">
+            <img class="full-image" ng-src="{{friend.url}}">
           </a>
           <p>
             {{friend.description}}
