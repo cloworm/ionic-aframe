@@ -9,7 +9,7 @@
         <div class="item item-avatar">
           <img src="{{friend.User.avatar}}">
           <h2>{{friend.title}} by {{friend.User.username}}</h2>
-          <p>{{friend.createdAt}}</p>
+          <p>{{friend.createdAt | date : mediumDate}}</p>
         </div>
 
         <div class="item item-body">
