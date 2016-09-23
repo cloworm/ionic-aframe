@@ -10,7 +10,6 @@ angular.module('starter.services', [])
     all: function() {
       return $http.get('/api/posts')
       .then(function(response) {
-        console.log(response.data);
         return response.data;
       })
       .catch(function(err) {
