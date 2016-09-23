@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var session = require('express-session');
-var secret = require('./secret');
+var envVar = require('./server/env');
 
 app.use(express.static('www'));
 app.use(bodyParser.json());
@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev'));
 
 app.use(session({
-  secret: process.env.SECRET || secret.secret,
+  secret: envVar.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
