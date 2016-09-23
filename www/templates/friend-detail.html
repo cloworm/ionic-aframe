@@ -4,18 +4,14 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view title="{{friend.name}}">
+<ion-view title="{{friend.title}}">
   <!-- <ion-content has-header="true" padding="true"> -->
   <a-scene>
-    <a-sky src="{{friend.url}}"></a-sky>
-<!--       <a-box color="#6173F4" width="4" height="10" depth="2"
-               position="-20 -10 0" scale="2 0.5 3"></a-box> -->
+    <a-sky ng-src="{{trustSrc(url)}}"></a-sky>
     <a-box color="#6173F4" width="4" height="10" depth="2"
-       position="-20 -10 0" rotation="0 0 45" scale="2 0.5 3"
-       ng-mouseover="changeColor()">
-       <!-- <a-animation attribute="rotation" begin="click" repeat="indefinite" to="0 360 0"></a-animation> -->
+       position="-20 -10 0" rotation="0 0 45" scale="2 0.5 3">
     </a-box>
-    <a-entity text="text: {{friend.name}}" position="-15 -5 0" rotation="0 90 0"></a-entity>
+    <a-entity text="text: {{friend.title}}" position="-15 -5 0" rotation="0 90 0"></a-entity>
 
   </a-scene>
   <!-- </ion-content> -->

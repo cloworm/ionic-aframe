@@ -2,7 +2,11 @@ var router = require('express').Router();
 var models = require('../../models');
 
 router.get('/', function(req, res, next) {
-  models.Post.findAll()
+  models.Post.findAll({
+    include: [
+      {model: models.User, required: true}
+    ]
+  })
   .then(function(posts) {
     res.send(posts);
   })
@@ -28,11 +32,28 @@ router.post('/:id/likes', function(req, res, next) {
   .catch(next);
 });
 
-router.delete('/:id/likes', function(req, res, next) {
+router.get('/:id/likes/:userId', function(req, res, next) {
   models.Like.findOne({
     where: {
       PostId: req.params.id,
-      UserId: req.body.userId
+      UserId: req.params.userId
+    }
+  })
+  .then(function(like) {
+    if (like) {
+      res.send(true);
+    } else {
+      res.send(null);
+    }
+  })
+  .catch(next);
+});
+
+router.delete('/:id/likes/:userId', function(req, res, next) {
+  models.Like.findOne({
+    where: {
+      PostId: req.params.id,
+      UserId: req.params.userId
     }
   })
   .then(function(like) {
@@ -45,7 +66,14 @@ router.delete('/:id/likes', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  models.Post.findById(req.params.id)
+  models.Post.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: [
+      {model: models.User, required: true}
+    ]
+  })
   .then(function(post) {
     res.send(post);
   })
