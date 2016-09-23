@@ -25,6 +25,15 @@ angular.module('starter.services', [])
         console.log(err);
       });
     },
+    getPostLikes: function(postId) {
+      return $http.get('/api/posts/' + postId + '/likes')
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    },
     getUserLikes: function(postId, userId) {
       return $http.get('/api/posts/' + postId + '/likes/' + userId)
       .then(function(response) {

@@ -21,6 +21,18 @@ router.post('/', function(req, res, next) {
   .catch(next);
 });
 
+router.get('/:id/likes', function(req, res, next) {
+  models.Like.findAll({
+    where: {
+      PostId: req.params.id
+    }
+  })
+  .then(function(likes) {
+    res.send(likes);
+  })
+  .catch(next);
+});
+
 router.post('/:id/likes', function(req, res, next) {
   models.Like.create({
     PostId: req.params.id,

@@ -20,7 +20,7 @@
             {{friend.description}}
           </p>
           <p>
-            <a href="#" ng-click="toggleLike(friend.id, 1)" class="subdued">1
+            <a href="#" ng-click="toggleLike(friend.id, 1)" class="subdued">{{friend.likes.length}}
               <i ng-show="friend.liked" class="icon ion-ios-heart"></i>
               <i ng-hide="friend.liked" class="ion ion-ios-heart-outline"></i>
             </a>
