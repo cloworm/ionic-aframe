@@ -17,6 +17,33 @@ router.post('/', function(req, res, next) {
   .catch(next);
 });
 
+router.post('/:id/likes', function(req, res, next) {
+  models.Like.create({
+    PostId: req.params.id,
+    UserId: req.body.userId
+  })
+  .then(function(like) {
+    res.send(like);
+  })
+  .catch(next);
+});
+
+router.delete('/:id/likes', function(req, res, next) {
+  models.Like.findOne({
+    where: {
+      PostId: req.params.id,
+      UserId: req.body.userId
+    }
+  })
+  .then(function(like) {
+    return like.destroy();
+  })
+  .then(function(response) {
+    res.send(response);
+  })
+  .catch(next);
+});
+
 router.get('/:id', function(req, res, next) {
   models.Post.findById(req.params.id)
   .then(function(post) {
@@ -35,6 +62,7 @@ router.put('/:id', function(req, res, next) {
   })
   .catch(next);
 });
+
 
 router.delete('/:id', function(req, res, next) {
   models.Post.findById(req.params.id)
