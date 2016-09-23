@@ -15,8 +15,15 @@ angular.module('starter.controllers', [])
         post.liked = response;
       });
     });
+  })
+  .then(function() {
+    $scope.friends.forEach(function(post) {
+      return Friends.getPostLikes(post.id)
+      .then(function(response) {
+        post.likes = response;
+      });
+    });
   });
-
 
   $scope.toggleLike = function(postId, userId) {
     var post = $scope.friends.filter(function(singlePost) {
