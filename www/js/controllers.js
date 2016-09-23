@@ -7,15 +7,26 @@ angular.module('starter.controllers', [])
   Friends.all()
   .then(function(friends) {
     $scope.friends = friends;
+  })
+  .then(function() {
+    $scope.friends.forEach(function(post) {
+      return Friends.getUserLikes(post.id, 1)
+      .then(function(response) {
+        post.liked = response;
+      });
+    });
   });
 
-  $scope.liked = false;
 
   $scope.toggleLike = function(postId, userId) {
-    if ($scope.liked) {
+    var post = $scope.friends.filter(function(singlePost) {
+      return singlePost.id === postId;
+    })[0];
+
+    if (post.liked) {
       return Friends.unlike(postId, userId)
       .then(function() {
-        $scope.liked = false;
+        post.liked = false;
       })
       .catch(function(err) {
         console.log(err);
@@ -23,12 +34,13 @@ angular.module('starter.controllers', [])
     } else {
       return Friends.like(postId, {userId: userId})
       .then(function() {
-        $scope.liked = true;
+        post.liked = true;
       })
       .catch(function(err) {
         console.log(err);
       });
     }
+
   };
 })
 
