@@ -33,9 +33,9 @@ router.get('/callback', passport.authenticate('google', {
 }));
 
 passport.use(new GoogleStrategy({
-  clientID: secret.clientID,
-  clientSecret: secret.clientSecret,
-  callbackURL: secret.callbackURL
+  clientID: process.env.GOOGLE_CLIENT_ID || secret.clientID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET || secret.clientSecret,
+  callbackURL: process.env.GOOGLE_CALLBACK_URL || secret.callbackURL
 }, function (token, refreshToken, profile, done) {
   var info = {
     name: profile.displayName,

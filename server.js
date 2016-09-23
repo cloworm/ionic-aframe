@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev'));
 
 app.use(session({
-  secret: secret.secret,
+  secret: process.env.SECRET || secret.secret,
   resave: false,
   saveUninitialized: false
 }));
