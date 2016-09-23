@@ -10,8 +10,17 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
-  $scope.friend = Friends.get($stateParams.friendId);
+.controller('FriendDetailCtrl', function($scope, $stateParams, Friends, $sce) {
+  Friends.get($stateParams.friendId)
+  .then(function(friend) {
+    $scope.friend = friend;
+    $scope.url = friend.url;
+    console.log('friend', $scope.friend);
+  });
+
+  $scope.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl(src);
+  }
 })
 
 .controller('AccountCtrl', function($scope) {
