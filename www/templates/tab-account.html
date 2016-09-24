@@ -1,10 +1,20 @@
 <ion-view title="Account">
   <ion-content class="padding">
     <h1>Account</h1>
-    <a
-      href="/auth/google"
-      class="button">
-      <span>Sign in with Google</span>
-    </a>
+    <h4 ng-if="!user.username">Please create a username below</h4>
+    <form>
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="user.email" placeholder="{{user.email}}" ng-disabled="user.email">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Username</span>
+          <input type="text" ng-model="user.username" placeholder="{{user.username}}">
+        </label>
+      </div>
+      <button class="button button-block" ng-click="updateUser(user)">Submit</button>
+      <h5 ng-if="updated">Account Updated</h5>
+    </form>
   </ion-content>
 </ion-view>

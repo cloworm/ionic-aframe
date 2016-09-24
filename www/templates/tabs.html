@@ -17,16 +17,14 @@
     <ion-nav-view name="tab-friends"></ion-nav-view>
   </ion-tab>
 
-
-  <!-- Account Tab -->
-  <ion-tab title="Account" icon="icon ion-gear-b" href="#/tab/account">
-    <ion-nav-view name="tab-account"></ion-nav-view>
-  </ion-tab>
-
     <!-- Account Tab -->
   <ion-tab ng-if="user" title="Upload" icon="icon ion-camera" href="#/tab/upload">
     <ion-nav-view name="tab-upload"></ion-nav-view>
   </ion-tab>
 
+  <!-- Account Tab -->
+  <ion-tab ng-if="user" title="Account" icon="icon ion-gear-b" href="#/tab/account">
+    <ion-nav-view name="tab-account"></ion-nav-view>
+  </ion-tab>
 
 </ion-tabs>

@@ -9,7 +9,15 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, Authentication, $state) {
+  $scope.user = null;
+  Authentication.getLoggedInUser()
+  .then(function(user) {
+    $scope.user = user;
+    if (!$scope.user.username) {
+      $state.go('tab.account');
+    }
+  });
 })
 
 .controller('FriendsCtrl', function($scope, Friends) {
@@ -72,7 +80,19 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, Authentication, Users) {
+  Authentication.getLoggedInUser()
+  .then(function(user) {
+    $scope.user = user;
+  });
+
+  $scope.updateUser = function(user) {
+    Users.updateUser(user.id, user)
+    .then(function(updatedUser) {
+      $scope.user = updatedUser;
+      $scope.updated = true;
+    });
+  };
 })
 
 .controller('UploadCtrl', function($scope, Posts, FileUploader, $state) {
