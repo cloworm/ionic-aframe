@@ -9,11 +9,14 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('DashCtrl', function($scope, Authentication) {
+.controller('DashCtrl', function($scope, Authentication, $state) {
   $scope.user = null;
   Authentication.getLoggedInUser()
   .then(function(user) {
     $scope.user = user;
+    if (!$scope.user.username) {
+      $state.go('tab.account');
+    }
   });
 })
 
@@ -87,7 +90,7 @@ angular.module('starter.controllers', [])
     Users.updateUser(user.id, user)
     .then(function(updatedUser) {
       $scope.user = updatedUser;
-      console.log('updated user', $scope.user);
+      $scope.updated = true;
     });
   };
 })
