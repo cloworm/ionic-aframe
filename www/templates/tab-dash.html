@@ -3,6 +3,11 @@
     <div class="padding">
       <div ng-show="user">
         Welcome back, {{user.email}}
+        <a
+          ng-click="logout()"
+          class="button button-block">
+          <span>Logout</span>
+        </a>
       </div>
 
       <div ng-hide="user">

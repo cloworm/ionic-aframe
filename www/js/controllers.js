@@ -1,15 +1,21 @@
 angular.module('starter.controllers', [])
 
-.controller('TabCtrl', function($scope, Authentication) {
+.controller('TabCtrl', function($scope, $rootScope, Authentication) {
   $scope.user = null;
+
+  $rootScope.$on('loggedOut', function() {
+    $scope.user = null;
+  });
+
   Authentication.getLoggedInUser()
   .then(function(user) {
     $scope.user = user;
   });
 })
 
-.controller('DashCtrl', function($scope, Authentication, $state) {
+.controller('DashCtrl', function($scope, $rootScope, Authentication, $state) {
   $scope.user = null;
+
   Authentication.getLoggedInUser()
   .then(function(user) {
     $scope.user = user;
@@ -17,6 +23,17 @@ angular.module('starter.controllers', [])
       $state.go('tab.account');
     }
   });
+
+  $scope.logout = function() {
+    return Authentication.logout()
+    .then(function() {
+      $scope.user = null;
+      $rootScope.$broadcast('loggedOut');
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+  };
 })
 
 .controller('FriendsCtrl', function($scope, Friends, Authentication, $state) {
