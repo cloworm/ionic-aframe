@@ -77,6 +77,13 @@ angular.module('starter.services', [])
       .then(function(response) {
         return response.data;
       });
+    },
+
+    logout: function() {
+      return $http.delete('/auth/me')
+      .then(function(response) {
+        return response.data;
+      });
     }
   };
 })

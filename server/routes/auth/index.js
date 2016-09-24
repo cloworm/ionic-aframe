@@ -40,6 +40,7 @@ router.get('/me', function (req, res, next) {
 
 router.delete('/me', function (req, res, next) {
   req.logout();
+  req.session.passport.user = null;
   res.status(204).end();
 });
 
