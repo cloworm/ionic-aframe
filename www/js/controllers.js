@@ -7,36 +7,29 @@ angular.module('starter.controllers', [])
     $scope.user = null;
   });
 
-  Authentication.getLoggedInUser()
-  .then(function(user) {
-    $scope.user = user;
-  });
+  function getUser() {
+    Authentication.getLoggedInUser()
+    .then(function(user) {
+      $scope.user = user;
+    });
+  }
+  getUser();
 })
 
 .controller('DashCtrl', function($scope, $rootScope, Authentication, $state) {
-  $scope.user = null;
 
   Authentication.getLoggedInUser()
   .then(function(user) {
     $scope.user = user;
-    if ($scope.user && !$scope.user.username) {
+    if (user && !user.username) {
       $state.go('tab.account');
+    } else {
+      $state.go('tab.friends');
     }
   });
-
-  $scope.logout = function() {
-    return Authentication.logout()
-    .then(function() {
-      $scope.user = null;
-      $rootScope.$broadcast('loggedOut');
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-  };
 })
 
-.controller('FriendsCtrl', function($scope, Friends, Authentication, $state) {
+.controller('FriendsCtrl', function($scope, Friends, Authentication) {
   $scope.user = null;
 
   Authentication.getLoggedInUser()
@@ -75,26 +68,6 @@ angular.module('starter.controllers', [])
   }
 
   getAllPosts();
-
-  // .then(function() {
-  //   if ($scope.user) {
-  //     $scope.posts.forEach(function(post) {
-  //       return Friends.getUserLikes(post.id, $scope.user.id)
-  //       .then(function(response) {
-  //         post.liked = response;
-  //       });
-  //     });
-  //   }
-  // })
-  // .then(function() {
-  //   $scope.posts.forEach(function(post) {
-  //     return Friends.getPostLikes(post.id)
-  //     .then(function(response) {
-  //       post.likes = response;
-  //     });
-  //   });
-  // });
-
 
   $scope.toggleLike = function(postId) {
     var post = $scope.posts.filter(function(singlePost) {
@@ -168,7 +141,8 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AccountCtrl', function($scope, Authentication, Users) {
+.controller('AccountCtrl', function($scope, $rootScope, Authentication, Users) {
+
   Authentication.getLoggedInUser()
   .then(function(user) {
     $scope.user = user;
@@ -179,6 +153,17 @@ angular.module('starter.controllers', [])
     .then(function(updatedUser) {
       $scope.user = updatedUser;
       $scope.updated = true;
+    });
+  };
+
+  $scope.logout = function() {
+    return Authentication.logout()
+    .then(function() {
+      $scope.user = null;
+      $rootScope.$broadcast('loggedOut');
+    })
+    .catch(function(err) {
+      console.log(err);
     });
   };
 })

@@ -1,23 +1,17 @@
-<ion-view title="Dashboard" class="dashboard">
-  <ion-content>
-    <div class="padding">
-      <div ng-show="user">
-        Welcome back, {{user.email}}
-        <a
-          ng-click="logout()"
-          class="button button-block">
-          <span>Logout</span>
-        </a>
-      </div>
-
-      <div ng-hide="user">
-        Welcome to VR Gram!
-        <a
-          href="/auth/google"
-          class="button button-block">
-          <span>Sign in with Google</span>
-        </a>
-      </div>
+<ion-view title="Dashboard" class="dashboard" cache-view="false">
+  <ion-content scroll="false">
+    <div class="dashboard-content">
+      <h1>SceneShare</h1>
+      <p>It's like you were there.</p>
+      <a
+        href="/auth/google"
+        ng-hide="user"
+        class="button button-block button-light">
+        <span>Sign in with Google</span>
+      </a>
     </div>
+    <a-scene>
+      <a-sky src="https://s3-us-west-2.amazonaws.com/ionic-aframe/6979883093_7f0680e9b8_h.jpg?X-Amz-Date=20160924T224746Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=663993fba5191dd6e65b9fe79ce8db0ac454e9f640b985ce70102cc1a6839427&X-Amz-Credential=ASIAJC2JNL72DOZIWEFQ/20160924/us-west-2/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEKn//////////wEaDIrQ%2BgkkMT7pV0Pl3CL6AWHZnqNSukv%2BNcoYEwz606PfdBTFN311tIg2zvCpbhBgp%2B3nO3ouHWOMoELAhltfXVdlEAfNX/u8Zt2fBzfxAgYHP0fYeMoilfBymbCNtKyEW9GolIYRecju7P//%2B1UE8BrYiLVnsoeK0LBLaQ9/V181FZ79Iqsl9NuwVoElJEH6R2S5koMWRfd3vyDAvLdycPOUPN0QDRRbQRq906K5sYuGeysv8VN1bQsedaKrMtu59sLgV6ehg4KWVuoacmbVxT2HXtrgOyV2VFQWNIaYT0Ep3k3FH6gNZBfQhRCdNllhfW6AM9ylsTyFQ35Sw30I60XiFWlMUsLuWlUoqL6avwU%3D"></a-sky>
+    </a-scene>
   </ion-content>
 </ion-view>
