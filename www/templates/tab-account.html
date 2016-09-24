@@ -1,7 +1,9 @@
-<ion-view title="Account">
+<ion-view title="Account" cache-view="false">
   <ion-content class="padding">
+    <p>Welcome back, {{user.email}}</p>
+    <a class="button" href="#/tab/friend/profile/{{user.id}}">Go To My Profile</a>
     <h1>Account</h1>
-    <h4 ng-if="!user.username">Please create a username below</h4>
+    <h4 class="notification" ng-if="!user.username">Please create a username below</h4>
     <form>
       <div class="list">
         <label class="item item-input item-stacked-label">
@@ -16,6 +18,10 @@
       <button class="button button-block" ng-click="updateUser(user)">Submit</button>
       <h5 ng-if="updated">Account Updated</h5>
     </form>
-    <a class="button" href="#/tab/friend/profile/{{user.id}}">Go To My Profile</a>
+    <a
+      ng-click="logout()"
+      class="button button-block button-light">
+      <span>Logout</span>
+    </a>
   </ion-content>
 </ion-view>
