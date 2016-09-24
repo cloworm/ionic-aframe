@@ -19,8 +19,9 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('FriendsCtrl', function($scope, Friends, Authentication) {
+.controller('FriendsCtrl', function($scope, Friends, Authentication, $state) {
   $scope.user = null;
+
   Authentication.getLoggedInUser()
   .then(function(user) {
     $scope.user = user;
@@ -138,8 +139,9 @@ angular.module('starter.controllers', [])
   $scope.submit = function(body) {
     body.url = $scope.filePath;
     return Posts.createPost(body)
-    .then(function() {
-      $scope.uploader.queue = null;
+    .then(function(post) {
+      console.log('POSTED', post);
+      $scope.uploader.queue = [];
       $scope.uploaded = false;
       $state.go('tab.friends');
     });
