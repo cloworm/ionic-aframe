@@ -1,9 +1,15 @@
 <ion-view title="Upload">
   <ion-content class="padding">
-<!--     <form>
+    <form>
       <div class="list">
-        <label for="fileUpload">Choose an image</label>
-        <input file-model="file" class="inputfile" id="fileUpload" type="file" accept="image/*">
+        <input type="file" nv-file-select uploader="uploader"/><br/>
+               <ul>
+                   <li ng-repeat="item in uploader.queue">
+                       Name: <span ng-bind="item.file.name"></span><br/>
+                       <button ng-click="item.upload()">upload</button>
+                   </li>
+               </ul>
+
         <label class="item item-input">
           <span class="input-label">Title</span>
           <input ng-model="upload.title" type="text">
@@ -17,14 +23,7 @@
       <button ng-click="submit(upload)">Submit</button>
 
 
-    </form> -->
-    <input type="file" nv-file-select uploader="uploader"/><br/>
-           <ul>
-               <li ng-repeat="item in uploader.queue">
-                   Name: <span ng-bind="item.file.name"></span><br/>
-                   <button ng-click="item.upload()">upload</button>
-               </li>
-           </ul>
+    </form>
   </ion-content>
 </ion-view>
 

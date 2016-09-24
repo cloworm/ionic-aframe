@@ -1,11 +1,12 @@
 var router = require('express').Router();
 var models = require('../../models');
-// var s3client = require('../../lib/s3-client.js');
 var multer = require('multer');
 var upload = multer({ dest: 'uploads/' });
 var AWS = require('aws-sdk');
 var envVar = require('../../env');
 var fs = require('fs');
+var uuid = require('uuid');
+var path = require('path');
 
 console.log(envVar.AWS);
 
@@ -30,21 +31,19 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', upload.single('file'), function(req, res, next) {
-  console.log('file', req.file);
-  console.log('body', req.body);
-  res.send('hi');
+  console.log(req.file);
   var params = {
     Body: fs.createReadStream(req.file.path),
     Bucket: 'ionic-aframe-development',
-    Key: 'image.jpg',
+    Key: 'posts/' + uuid.v1() + path.extname(req.file.originalname),
     ContentLength: req.file.size,
     ContentType: req.file.mimetype,
     ContentEncoding: req.file.encoding
   };
 
   client.putObject(params, function(err, data) {
-      if (err) console.log("ASDFYUBINIINIUNI", err, err.stack); // an error occurred
-  else     console.log("ASDFYUBINIINIUNI", data);           // successful response
+      if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
   })
 
   // var uploader = s3client.uploadFile(params);
