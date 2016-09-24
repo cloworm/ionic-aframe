@@ -77,11 +77,14 @@ angular.module('starter.controllers', [])
 
 .controller('UploadCtrl', function($scope, Posts, FileUploader, $state) {
   $scope.uploaded = false;
+
   $scope.submit = function(body) {
     body.url = $scope.filePath;
     console.log('body', body);
     return Posts.createPost(body)
     .then(function() {
+      $scope.uploader.queue = null;
+      $scope.uploaded = false;
       $state.go('tab.friends');
     });
   };
@@ -132,6 +135,7 @@ angular.module('starter.controllers', [])
   uploader.onCompleteItem = function(fileItem, response, status, headers) {
       $scope.uploaded = true;
       $scope.filePath = 'https://s3-us-west-2.amazonaws.com/ionic-aframe-development/' + response;
+
       console.info('onCompleteItem', fileItem, response, status, headers);
   };
   uploader.onCompleteAll = function() {

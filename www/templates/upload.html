@@ -2,43 +2,46 @@
   <ion-content class="padding">
 
 
-      <h3>Choose Your Image</h3>
+      <h3>Upload 360 Photo <a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#safe=off&q=equirectangular+photo" target="_blank"><i class="icon ion-help-circled"></i></a></h3>
 
-      <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
-      <input type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+      <label class="custom-file-upload" for="my-file-selector">
+        <i class="icon ion-camera"></i> Choose Your Photo
+        <input style="display:none;" id="my-file-selector" type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+      </label>
 
-      <div ng-repeat="item in uploader.queue">
-        <strong>{{ item.file.name }}</strong>
+      <div class="upload-preview" ng-repeat="item in uploader.queue">
+        <h6>{{ item.file.name }}</h6>
         <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-        <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-        <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-        <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+        <div class="button-bar">
+          <a type="button" class="button button-outline button-balanced" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+            <i class="icon ion-ios-cloud-upload"></i> Upload
+          </a>
+          <a type="button" class="button" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+            <i class="icon ion-ios-close"></i> Cancel
+          </a>
+          <a type="button" class="button" ng-click="item.remove()">
+            <i class="icon ion-trash-a"></i> Remove
+          </a>
+        </div>
 
-        <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-            <span class="glyphicon glyphicon-upload"></span> Upload
-        </button>
-        <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-        </button>
-        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-            <span class="glyphicon glyphicon-trash"></span> Remove
-        </button>
       </div>
 
       <form ng-show="uploaded">
+        <br />
+        <h3>Enter Post Details</h3>
         <div class="list">
 
           <label class="item item-input">
             <span class="input-label">Title</span>
-            <input ng-model="upload.title" type="text">
+            <input ng-model="post.title" type="text">
           </label>
           <label class="item item-input">
             <span class="input-label">Description</span>
-            <input ng-model="upload.description" type="text">
+            <input ng-model="post.description" type="text">
           </label>
         </div>
 
-        <button ng-click="submit(upload)">Submit</button>
+        <button class="button button-block" ng-click="submit(post)">Submit</button>
 
     </form>
   </ion-content>

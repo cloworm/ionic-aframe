@@ -23,3 +23,21 @@ a-scene {
 .welcome {
   height: 100%;
 }
+
+.custom-file-upload {
+  display: block;
+  margin-left: 15px;
+  margin-right: 15px;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.upload-preview canvas {
+  display:block;
+  margin: 0 auto 10px auto;
+}
+
+.upload-preview h6 {
+  text-align: center;
+}
