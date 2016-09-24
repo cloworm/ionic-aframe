@@ -22,7 +22,8 @@ router.get('/', function(req, res, next) {
   models.Post.findAll({
     include: [
       {model: models.User, required: true}
-    ]
+    ],
+    order: 'id DESC'
   })
   .then(function(posts) {
     res.send(posts);
