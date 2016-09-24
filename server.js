@@ -19,6 +19,7 @@ app.use(session({
 
 app.use(function (req, res, next) {
   console.log('session', req.session);
+  if (req.session.passport) console.log(req.session.passport.user);
   next();
 });
 

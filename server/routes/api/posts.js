@@ -30,38 +30,35 @@ router.get('/', function(req, res, next) {
   .catch(next);
 });
 
-router.post('/', upload.single('file'), function(req, res, next) {
+router.post('/', function(req, res, next) {
+  req.body.UserId = req.session.passport.user;
+  models.Post.create(req.body)
+  .then(function(post) {
+    res.send(post);
+  })
+  .catch(next);
+});
+
+router.post('/image', upload.single('file'), function(req, res, next) {
   console.log(req.file);
+  var fileName = 'posts/' + uuid.v1() + path.extname(req.file.originalname);
   var params = {
     Body: fs.createReadStream(req.file.path),
     Bucket: 'ionic-aframe-development',
-    Key: 'posts/' + uuid.v1() + path.extname(req.file.originalname),
+    Key: fileName,
     ContentLength: req.file.size,
     ContentType: req.file.mimetype,
     ContentEncoding: req.file.encoding
   };
 
   client.putObject(params, function(err, data) {
-      if (err) console.log(err, err.stack); // an error occurred
-  else     console.log(data);           // successful response
-  })
-
-  // var uploader = s3client.uploadFile(params);
-  // uploader.on('error', function(err) {
-  //   console.error('unable to upload:', err.stack);
-  // });
-  // uploader.on('progress', function() {
-  //   console.log('progress', uploader.progressMd5Amount,
-  //             uploader.progressAmount, uploader.progressTotal);
-  // });
-  // uploader.on('end', function() {
-  //   console.log('done uploading');
-  // });
-  // models.Post.create(req.body)
-  // .then(function(post) {
-  //   res.send(post);
-  // })
-  // .catch(next);
+    if (err) {
+      console.log(err, err.stack);  // an error occurred
+    } else {
+      console.log(data);           // successful response
+      res.send(fileName);
+    }
+  });
 });
 
 router.get('/:id/likes', function(req, res, next) {
