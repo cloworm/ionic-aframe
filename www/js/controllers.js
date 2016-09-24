@@ -118,17 +118,37 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('UserProfileCtrl', function($scope, $stateParams, Posts, Users) {
+.controller('UserProfileCtrl', function($scope, $stateParams, Posts, Users, Authentication) {
+  $scope.sameUser = false;
+
   Posts.getPostsByUserId($stateParams.userId)
   .then(function(posts) {
     $scope.posts = posts;
-    console.log($scope.posts);
-    if (posts) {
-      $scope.username = $scope.posts[0].User.username;
-      $scope.avatar = $scope.posts[0].User.avatar;
-      $scope.createdAt = $scope.posts[0].User.createdAt;
+  });
+
+  Users.getUserById($stateParams.userId)
+  .then(function(user) {
+    $scope.user = user;
+  });
+
+  Authentication.getLoggedInUser()
+  .then(function(user) {
+    if (user && user.id === $scope.user.id) {
+      $scope.sameUser = true;
     }
   });
+
+  $scope.deletePost = function(id) {
+    return Posts.deletePostById(id)
+    .then(function() {
+      $scope.posts = $scope.posts.filter(function(post) {
+        return post.id !== id;
+      });
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+  };
 })
 
 .controller('AccountCtrl', function($scope, Authentication, Users) {

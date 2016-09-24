@@ -53,9 +53,13 @@ angular.module('starter.services', [])
       return $http.put('/api/users/' + userId, body)
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(err) {
-        console.log(err);
+      });
+    },
+
+    getUserById: function(userId) {
+      return $http.get('/api/users/' + userId)
+      .then(function(response) {
+        return response.data;
       });
     }
   };
@@ -72,9 +76,6 @@ angular.module('starter.services', [])
       })
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(err) {
-        console.log(err);
       });
     }
   };
@@ -85,9 +86,6 @@ angular.module('starter.services', [])
       return $http.post('/api/posts', body)
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(err) {
-        console.log(err);
       });
     },
 
@@ -95,9 +93,13 @@ angular.module('starter.services', [])
       return $http.get('/api/users/' + userId + '/posts')
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(err) {
-        console.log(err);
+      });
+    },
+
+    deletePostById: function(postId) {
+      return $http.delete('/api/posts/' + postId)
+      .then(function(response) {
+        return response.data;
       });
     }
   };
@@ -110,54 +112,36 @@ angular.module('starter.services', [])
       return $http.get('/api/posts')
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(err) {
-        console.log(err);
       });
     },
     get: function(postId) {
       return $http.get('/api/posts/' + postId)
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(err) {
-        console.log(err);
       });
     },
     getPostLikes: function(postId) {
       return $http.get('/api/posts/' + postId + '/likes')
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(err) {
-        console.log(err);
       });
     },
     getUserLikes: function(postId, userId) {
       return $http.get('/api/posts/' + postId + '/likes/' + userId)
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(err) {
-        console.log(err);
       });
     },
     like: function(postId, body) {
       return $http.post('/api/posts/' + postId + '/likes', body)
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(err) {
-        console.log(err);
       });
     },
     unlike: function(postId, userId) {
       return $http.delete('/api/posts/' + postId + '/likes/' + userId)
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(err) {
-        console.log(err);
       });
     }
   };
