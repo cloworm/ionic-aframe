@@ -6,5 +6,10 @@ module.exports = {
     clientID: secret.clientID,
     clientSecret: secret.clientSecret,
     callbackURL: secret.callbackURL
+  },
+  AWS: {
+    accessKeyId: secret.AWSAccessKeyId,
+    secretAccessKey: secret.AWSSecretAccessKey,
+    region: secret.AWSRegion
   }
 };

@@ -1,19 +1,49 @@
 <ion-view title="Upload">
   <ion-content class="padding">
-    <div class="list">
-      <label for="fileUpload">Choose an image</label>
-      <input ng-model="upload.file" class="inputfile" id="fileUpload" type="file" accept="image/*;capture=camera">
-      <label class="item item-input">
-        <span class="input-label">Title</span>
-        <input ng-model="upload.title" type="text">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Description</span>
-        <input ng-model="upload.description" type="password">
-      </label>
-    </div>
 
-    <button ng-click="submit(upload)">Submit</button>
+
+      <h3>Upload 360 Photo <a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#safe=off&q=equirectangular+photo" target="_blank"><i class="icon ion-help-circled"></i></a></h3>
+
+      <label class="custom-file-upload" for="my-file-selector">
+        <i class="icon ion-camera"></i> Choose Your Photo
+        <input style="display:none;" id="my-file-selector" type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+      </label>
+
+      <div class="upload-preview" ng-repeat="item in uploader.queue">
+        <h6>{{ item.file.name }}</h6>
+        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+        <div class="button-bar">
+          <a type="button" class="button button-outline button-balanced" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+            <i class="icon ion-ios-cloud-upload"></i> Upload
+          </a>
+          <a type="button" class="button" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+            <i class="icon ion-ios-close"></i> Cancel
+          </a>
+          <a type="button" class="button" ng-click="item.remove()">
+            <i class="icon ion-trash-a"></i> Remove
+          </a>
+        </div>
+
+      </div>
+
+      <form ng-show="uploaded">
+        <br />
+        <h3>Enter Post Details</h3>
+        <div class="list">
+
+          <label class="item item-input">
+            <span class="input-label">Title</span>
+            <input ng-model="post.title" type="text">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Description</span>
+            <input ng-model="post.description" type="text">
+          </label>
+        </div>
+
+        <button class="button button-block" ng-click="submit(post)">Submit</button>
+
+    </form>
   </ion-content>
 </ion-view>
 

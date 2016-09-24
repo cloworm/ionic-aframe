@@ -24,7 +24,7 @@
   </ion-tab>
 
     <!-- Account Tab -->
-  <ion-tab title="Upload" icon="icon ion-camera" href="#/tab/upload">
+  <ion-tab ng-if="user" title="Upload" icon="icon ion-camera" href="#/tab/upload">
     <ion-nav-view name="tab-upload"></ion-nav-view>
   </ion-tab>
 
