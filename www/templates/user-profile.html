@@ -1,0 +1,40 @@
+<ion-view title="Profile" cache-view="false">
+  <ion-content class="padding">
+    <div class="list card">
+
+      <div class="item item-avatar">
+        <img ng-src="{{user.avatar}}">
+        <h2>{{user.username}}</h2>
+        <p>Member since {{user.createdAt | date : mediumDate}}</p>
+      </div>
+    </div>
+
+    <div class="list card" ng-repeat="post in posts">
+
+      <div class="item item-body">
+        <button ng-click="deletePost(post.id)" ng-if="sameUser" class="button button-small button-assertive">Delete This Post</button>
+        <p>{{post.createdAt | date : mediumDate}}</p>
+        <a href="#/tab/friend/{{post.id}}">
+          <img class="full-image" ng-src="{{post.url}}">
+        </a>
+        <p>
+          {{post.description}}
+        </p>
+        <p>
+          <div ng-show="user">
+            <a href="#" ng-click="toggleLike(post.id, 1)" class="subdued">
+              {{post.likes.length}}
+              <i ng-show="post.liked" class="icon ion-ios-heart"></i>
+              <i ng-hide="post.liked" class="icon ion-ios-heart-outline"></i>
+            </a>
+          </div>
+          <div ng-hide="user">
+             {{post.likes.length}}
+             <i class="icon ion-ios-heart-outline"></i>
+          </div>
+        </p>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

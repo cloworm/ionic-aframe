@@ -108,13 +108,46 @@ angular.module('starter.controllers', [])
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends, $sce) {
   Friends.get($stateParams.friendId)
-  .then(function(friend) {
-    $scope.friend = friend;
-    $scope.url = friend.url;
+  .then(function(post) {
+    $scope.post = post;
+    $scope.url = post.url;
   });
 
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
+  };
+})
+
+.controller('UserProfileCtrl', function($scope, $stateParams, Posts, Users, Authentication) {
+  $scope.sameUser = false;
+
+  Posts.getPostsByUserId($stateParams.userId)
+  .then(function(posts) {
+    $scope.posts = posts;
+  });
+
+  Users.getUserById($stateParams.userId)
+  .then(function(user) {
+    $scope.user = user;
+  });
+
+  Authentication.getLoggedInUser()
+  .then(function(user) {
+    if (user && user.id === $scope.user.id) {
+      $scope.sameUser = true;
+    }
+  });
+
+  $scope.deletePost = function(id) {
+    return Posts.deletePostById(id)
+    .then(function() {
+      $scope.posts = $scope.posts.filter(function(post) {
+        return post.id !== id;
+      });
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
   };
 })
 

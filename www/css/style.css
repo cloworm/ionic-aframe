@@ -40,3 +40,7 @@ a-scene {
 .upload-preview h6 {
   text-align: center;
 }
+
+a {
+  text-decoration: none;
+}

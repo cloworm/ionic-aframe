@@ -47,4 +47,17 @@ router.delete('/:id', function(req, res, next) {
   .catch(next);
 });
 
+router.get('/:id/posts', function(req, res, next) {
+  models.Post.findAll({
+    where: {
+      UserId: req.params.id
+    },
+    include: {model: models.User, required: true}
+  })
+  .then(function(posts) {
+    res.send(posts);
+  })
+  .catch(next);
+});
+
 module.exports = router;
