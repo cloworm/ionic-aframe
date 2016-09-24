@@ -30,11 +30,9 @@ angular.module('starter.controllers', [])
     Friends.all()
     .then(function(posts) {
       $scope.posts = posts;
-      console.log($scope.posts);
       getAllPostLikes($scope.posts);
 
       if ($scope.user) {
-        console.log('get user likes', $scope.user);
         getAllUserLikes($scope.posts);
       }
     });
@@ -104,7 +102,6 @@ angular.module('starter.controllers', [])
         console.log(err);
       });
     }
-
   };
 })
 
@@ -140,7 +137,6 @@ angular.module('starter.controllers', [])
 
   $scope.submit = function(body) {
     body.url = $scope.filePath;
-    console.log('body', body);
     return Posts.createPost(body)
     .then(function() {
       $scope.uploader.queue = null;
