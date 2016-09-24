@@ -2,7 +2,6 @@ angular.module('starter.controllers', [])
 
 .controller('TabCtrl', function($scope, Authentication) {
   $scope.user = null;
-  console.log('user', $scope.user);
   Authentication.getLoggedInUser()
   .then(function(user) {
     $scope.user = user;
@@ -14,57 +13,95 @@ angular.module('starter.controllers', [])
   Authentication.getLoggedInUser()
   .then(function(user) {
     $scope.user = user;
-    if (!$scope.user.username) {
+    if ($scope.user && !$scope.user.username) {
       $state.go('tab.account');
     }
   });
 })
 
-.controller('FriendsCtrl', function($scope, Friends) {
-  Friends.all()
-  .then(function(friends) {
-    $scope.friends = friends;
-  })
-  .then(function() {
-    $scope.friends.forEach(function(post) {
-      return Friends.getUserLikes(post.id, 1)
+.controller('FriendsCtrl', function($scope, Friends, Authentication) {
+  $scope.user = null;
+  Authentication.getLoggedInUser()
+  .then(function(user) {
+    $scope.user = user;
+  });
+
+  function getAllPosts() {
+    Friends.all()
+    .then(function(posts) {
+      $scope.posts = posts;
+      getAllPostLikes($scope.posts);
+
+      if ($scope.user) {
+        getAllUserLikes($scope.posts);
+      }
+    });
+  }
+
+  function getAllUserLikes(posts) {
+    posts.forEach(function(post) {
+      return Friends.getUserLikes(post.id, $scope.user.id)
       .then(function(response) {
         post.liked = response;
       });
     });
-  })
-  .then(function() {
-    $scope.friends.forEach(function(post) {
+  }
+
+  function getAllPostLikes(posts) {
+    posts.forEach(function(post) {
       return Friends.getPostLikes(post.id)
       .then(function(response) {
         post.likes = response;
       });
     });
-  });
+  }
 
-  $scope.toggleLike = function(postId, userId) {
-    var post = $scope.friends.filter(function(singlePost) {
+  getAllPosts();
+
+  // .then(function() {
+  //   if ($scope.user) {
+  //     $scope.posts.forEach(function(post) {
+  //       return Friends.getUserLikes(post.id, $scope.user.id)
+  //       .then(function(response) {
+  //         post.liked = response;
+  //       });
+  //     });
+  //   }
+  // })
+  // .then(function() {
+  //   $scope.posts.forEach(function(post) {
+  //     return Friends.getPostLikes(post.id)
+  //     .then(function(response) {
+  //       post.likes = response;
+  //     });
+  //   });
+  // });
+
+
+  $scope.toggleLike = function(postId) {
+    var post = $scope.posts.filter(function(singlePost) {
       return singlePost.id === postId;
     })[0];
 
     if (post.liked) {
-      return Friends.unlike(postId, userId)
+      return Friends.unlike(postId, $scope.user.id)
       .then(function() {
         post.liked = false;
+        --post.likes.length;
       })
       .catch(function(err) {
         console.log(err);
       });
     } else {
-      return Friends.like(postId, {userId: userId})
+      return Friends.like(postId, {userId: $scope.user.id})
       .then(function() {
         post.liked = true;
+        ++post.likes.length;
       })
       .catch(function(err) {
         console.log(err);
       });
     }
-
   };
 })
 
@@ -100,7 +137,6 @@ angular.module('starter.controllers', [])
 
   $scope.submit = function(body) {
     body.url = $scope.filePath;
-    console.log('body', body);
     return Posts.createPost(body)
     .then(function() {
       $scope.uploader.queue = null;
