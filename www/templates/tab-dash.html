@@ -1,8 +1,17 @@
 <ion-view title="Dashboard" class="dashboard">
   <ion-content>
-    <div class="row welcome">
-      <div class="col col-center">
-        Some super content here!
+    <div class="padding">
+      <div ng-show="user">
+        Welcome back, {{user.email}}
+      </div>
+
+      <div ng-hide="user">
+        Welcome to VR Gram!
+        <a
+          href="/auth/google"
+          class="button button-block">
+          <span>Sign in with Google</span>
+        </a>
       </div>
     </div>
   </ion-content>

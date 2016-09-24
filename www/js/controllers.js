@@ -9,7 +9,12 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, Authentication) {
+  $scope.user = null;
+  Authentication.getLoggedInUser()
+  .then(function(user) {
+    $scope.user = user;
+  });
 })
 
 .controller('FriendsCtrl', function($scope, Friends) {
