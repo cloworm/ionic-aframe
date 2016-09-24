@@ -89,6 +89,16 @@ angular.module('starter.services', [])
       .catch(function(err) {
         console.log(err);
       });
+    },
+
+    getPostsByUserId: function(userId) {
+      return $http.get('/api/users/' + userId + '/posts')
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
     }
   };
 })

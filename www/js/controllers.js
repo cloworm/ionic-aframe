@@ -108,14 +108,18 @@ angular.module('starter.controllers', [])
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends, $sce) {
   Friends.get($stateParams.friendId)
-  .then(function(friend) {
-    $scope.friend = friend;
-    $scope.url = friend.url;
+  .then(function(post) {
+    $scope.post = post;
+    $scope.url = post.url;
   });
 
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
   };
+})
+
+.controller('UserProfileCtrl', function($scope, $stateParams) {
+
 })
 
 .controller('AccountCtrl', function($scope, Authentication, Users) {

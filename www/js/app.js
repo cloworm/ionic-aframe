@@ -78,6 +78,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
     })
+    .state('tab.friend-profile', {
+      url: '/friend/profile/:userId',
+      views: {
+        'tab-friends': {
+          templateUrl: 'templates/user-profile.html',
+          controller: 'UserProfileCtrl'
+        }
+      }
+    })
 
     .state('tab.account', {
       url: '/account',
