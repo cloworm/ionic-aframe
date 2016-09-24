@@ -6,8 +6,8 @@ module.exports = {
         callbackURL: process.env.GOOGLE_CALLBACK_URL
     },
     AWS: {
-      accessKeyId: AWS_AccessKeyId,
-      secretAccessKey: AWS_SecretAccessKey,
-      region: AWS_Region
+      accessKeyId: process.env.AWS_AccessKeyId,
+      secretAccessKey: process.env.AWS_SecretAccessKey,
+      region: process.env.AWS_Region
     }
 };
