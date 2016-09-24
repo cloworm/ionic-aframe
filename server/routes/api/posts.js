@@ -1,5 +1,21 @@
 var router = require('express').Router();
 var models = require('../../models');
+// var s3client = require('../../lib/s3-client.js');
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
+var AWS = require('aws-sdk');
+var envVar = require('../../env');
+var fs = require('fs');
+
+console.log(envVar.AWS);
+
+AWS.config.update({
+  accessKeyId: envVar.AWS.accessKeyId,
+  secretAccessKey: envVar.AWS.secretAccessKey,
+  region: envVar.AWS.region
+});
+
+var client = new AWS.S3();
 
 router.get('/', function(req, res, next) {
   models.Post.findAll({
@@ -13,12 +29,40 @@ router.get('/', function(req, res, next) {
   .catch(next);
 });
 
-router.post('/', function(req, res, next) {
-  models.Post.create(req.body)
-  .then(function(post) {
-    res.send(post);
+router.post('/', upload.single('file'), function(req, res, next) {
+  console.log('file', req.file);
+  console.log('body', req.body);
+  res.send('hi');
+  var params = {
+    Body: fs.createReadStream(req.file.path),
+    Bucket: 'ionic-aframe-development',
+    Key: 'image.jpg',
+    ContentLength: req.file.size,
+    ContentType: req.file.mimetype,
+    ContentEncoding: req.file.encoding
+  };
+
+  client.putObject(params, function(err, data) {
+      if (err) console.log("ASDFYUBINIINIUNI", err, err.stack); // an error occurred
+  else     console.log("ASDFYUBINIINIUNI", data);           // successful response
   })
-  .catch(next);
+
+  // var uploader = s3client.uploadFile(params);
+  // uploader.on('error', function(err) {
+  //   console.error('unable to upload:', err.stack);
+  // });
+  // uploader.on('progress', function() {
+  //   console.log('progress', uploader.progressMd5Amount,
+  //             uploader.progressAmount, uploader.progressTotal);
+  // });
+  // uploader.on('end', function() {
+  //   console.log('done uploading');
+  // });
+  // models.Post.create(req.body)
+  // .then(function(post) {
+  //   res.send(post);
+  // })
+  // .catch(next);
 });
 
 router.get('/:id/likes', function(req, res, next) {

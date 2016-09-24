@@ -3,6 +3,19 @@ angular.module('starter.services', [])
 /**
  * A simple example service that returns some data.
  */
+.factory('Posts', function($http) {
+  return {
+    createPost: function(body) {
+      return $http.post('/api/posts', body)
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    }
+  };
+})
 .factory('Friends', function($http) {
   // Might use a resource here that returns a JSON array
 

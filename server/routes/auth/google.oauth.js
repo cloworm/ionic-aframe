@@ -7,8 +7,6 @@ var models = require('../../models');
 var User = models.User;
 var envVar = require('../../env');
 
-console.log('env variables', envVar);
-
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });

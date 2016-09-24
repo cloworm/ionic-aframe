@@ -66,6 +66,17 @@ angular.module('starter.controllers', [])
 .controller('AccountCtrl', function($scope) {
 })
 
-.controller('UploadCtrl', function($scope) {
+.controller('UploadCtrl', function($scope, Posts, FileUploader) {
+  // $scope.submit = function(body) {
+  //   console.log($scope.fileName);
+  //   console.log('body', body);
+    // return Posts.createPost(body)
+    // .then(function(response) {
+    //   console.log(response);
+    // })
+  // }
+  $scope.uploader = new FileUploader({
+    url: '/api/posts'
+  });
 
 });

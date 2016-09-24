@@ -6,6 +6,7 @@ var session = require('express-session');
 var envVar = require('./server/env');
 
 app.use(express.static('www'));
+app.use(express.static('node_modules'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev'));
