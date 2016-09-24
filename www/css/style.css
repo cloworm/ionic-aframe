@@ -11,8 +11,8 @@ a-scene {
 }
 
 .gallery {
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .dashboard {
@@ -30,7 +30,6 @@ a-scene {
   margin-right: 15px;
   border: 1px solid #ccc;
   padding: 10px 15px;
-  cursor: pointer;
 }
 
 .upload-preview canvas {

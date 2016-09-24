@@ -77,7 +77,19 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, Authentication, Users) {
+  Authentication.getLoggedInUser()
+  .then(function(user) {
+    $scope.user = user;
+  });
+
+  $scope.updateUser = function(user) {
+    Users.updateUser(user.id, user)
+    .then(function(updatedUser) {
+      $scope.user = updatedUser;
+      console.log('updated user', $scope.user);
+    });
+  };
 })
 
 .controller('UploadCtrl', function($scope, Posts, FileUploader, $state) {

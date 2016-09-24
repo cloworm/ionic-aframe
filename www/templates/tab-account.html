@@ -1,6 +1,19 @@
 <ion-view title="Account">
   <ion-content class="padding">
     <h1>Account</h1>
-    {{user.email}}
+    <h4 ng-if="!user.username">Please create a username below</h4>
+    <form>
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="user.email" placeholder="{{user.email}}" ng-disabled="user.email">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Username</span>
+          <input type="text" ng-model="user.username" placeholder="{{user.username}}">
+        </label>
+      </div>
+      <button class="button button-block" ng-click="updateUser(user)">Submit</button>
+    </form>
   </ion-content>
 </ion-view>

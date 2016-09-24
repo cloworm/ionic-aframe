@@ -47,6 +47,19 @@ angular.module('starter.services', [])
     }
   };
 }])
+.factory('Users', function($http) {
+  return {
+    updateUser: function(userId, body) {
+      return $http.put('/api/users/' + userId, body)
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    }
+  };
+})
 .factory('Authentication', function($http) {
   return {
     getLoggedInUser: function() {
