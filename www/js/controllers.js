@@ -118,8 +118,17 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('UserProfileCtrl', function($scope, $stateParams) {
-
+.controller('UserProfileCtrl', function($scope, $stateParams, Posts, Users) {
+  Posts.getPostsByUserId($stateParams.userId)
+  .then(function(posts) {
+    $scope.posts = posts;
+    console.log($scope.posts);
+    if (posts) {
+      $scope.username = $scope.posts[0].User.username;
+      $scope.avatar = $scope.posts[0].User.avatar;
+      $scope.createdAt = $scope.posts[0].User.createdAt;
+    }
+  });
 })
 
 .controller('AccountCtrl', function($scope, Authentication, Users) {
