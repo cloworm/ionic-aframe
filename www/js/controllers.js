@@ -1,5 +1,14 @@
 angular.module('starter.controllers', [])
 
+.controller('TabCtrl', function($scope, Authentication) {
+  $scope.user = null;
+  console.log('user', $scope.user);
+  Authentication.getLoggedInUser()
+  .then(function(user) {
+    $scope.user = user;
+  });
+})
+
 .controller('DashCtrl', function($scope) {
 })
 
@@ -66,14 +75,14 @@ angular.module('starter.controllers', [])
 .controller('AccountCtrl', function($scope) {
 })
 
-.controller('UploadCtrl', function($scope, Posts, FileUploader) {
+.controller('UploadCtrl', function($scope, Posts, FileUploader, $state) {
   $scope.uploaded = false;
   $scope.submit = function(body) {
     body.url = $scope.filePath;
     console.log('body', body);
     return Posts.createPost(body)
-    .then(function(response) {
-      console.log(response);
+    .then(function() {
+      $state.go('tab.friends');
     });
   };
 

@@ -31,7 +31,11 @@ router.post('/signup', function (req, res, next) {
 });
 
 router.get('/me', function (req, res, next) {
-  res.json(req.user);
+  if (req.session.passport) {
+    res.json(req.session.passport.user);
+  } else {
+    res.json(null);
+  }
 });
 
 router.delete('/me', function (req, res, next) {

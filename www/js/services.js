@@ -47,6 +47,19 @@ angular.module('starter.services', [])
              }
          };
      }])
+.factory('Authentication', function($http) {
+  return {
+    getLoggedInUser: function() {
+      return $http.get('/auth/me')
+      .then(function(response) {
+        return response.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    }
+  };
+})
 .factory('Posts', function($http) {
   return {
     createPost: function(body) {
