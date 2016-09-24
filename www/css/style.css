@@ -16,8 +16,17 @@ a-scene {
 }
 
 .dashboard {
-  color: #673ab7;
-  font-weight: 600;
+  color: #fff;
+}
+
+.dashboard p{
+  font-family: 'Paytone One', sans-serif;
+}
+
+.dashboard h1 {
+  font-size: 2.5rem;
+  color: #fff;
+  font-family: 'Paytone One', sans-serif;
 }
 
 .welcome {
@@ -43,4 +52,13 @@ a-scene {
 
 a {
   text-decoration: none;
+}
+
+.dashboard-content {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
