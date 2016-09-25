@@ -101,7 +101,6 @@ angular.module('starter.controllers', [])
   .then(function(post) {
     $scope.post = post;
     $scope.url = post.url;
-    console.log('URL', $scope.url);
   });
 
   $scope.trustSrc = function(src) {
@@ -229,7 +228,7 @@ angular.module('starter.controllers', [])
   };
   uploader.onCompleteItem = function(fileItem, response, status, headers) {
       $scope.uploaded = true;
-      $scope.filePath = 'https://s3-us-west-2.amazonaws.com/ionic-aframe-development/' + response;
+      $scope.filePath = 'http://s3-us-west-2.amazonaws.com/ionic-aframe-development/' + response;
 
       console.info('onCompleteItem', fileItem, response, status, headers);
   };
