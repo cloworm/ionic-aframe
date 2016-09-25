@@ -229,7 +229,7 @@ angular.module('starter.controllers', [])
   };
   uploader.onCompleteItem = function(fileItem, response, status, headers) {
       $scope.uploaded = true;
-      $scope.filePath = 'http://s3-us-west-2.amazonaws.com/ionic-aframe-development/' + response;
+      $scope.filePath = response;
 
       console.info('onCompleteItem', fileItem, response, status, headers);
   };

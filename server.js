@@ -35,7 +35,7 @@ app.all('*', function(req, res, next) {
 // app.get('/blah', routeHandler);
 app.use('/api', require('./server/routes/api'));
 app.use('/auth', require('./server/routes/auth'));
-
+app.use('/media', require('./server/routes/media'));
 
 app.set('port', process.env.PORT || 3000);
 
