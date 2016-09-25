@@ -6,7 +6,10 @@
 -->
 <ion-view title="{{post.title}}" cache-view="false">
   <a-scene>
-    <a-sky ng-src="{{trustSrc(url)}}"></a-sky>
+    <a-assets timeout="10000">
+      <img id="pic" crossorigin="anonymous" src="{{trustSrc(url)}}">
+    </a-assets>
+    <a-sky src="#pic"></a-sky>
     <a-box color="#6173F4" width="4" height="10" depth="2"
        position="-20 -10 0" rotation="0 0 45" scale="2 0.5 3">
     </a-box>
