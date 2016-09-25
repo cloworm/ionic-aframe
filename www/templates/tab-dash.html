@@ -11,7 +11,10 @@
       </a>
     </div>
     <a-scene>
-      <a-sky src="https://s3-us-west-2.amazonaws.com/ionic-aframe/6979883093_7f0680e9b8_h.jpg"></a-sky>
+      <a-assets timeout="10000">
+        <img id="home" crossorigin src="https://s3-us-west-2.amazonaws.com/ionic-aframe/6979883093_7f0680e9b8_h.jpg">
+      </a-assets>
+      <a-sky src="#home"></a-sky>
     </a-scene>
   </ion-content>
 </ion-view>
