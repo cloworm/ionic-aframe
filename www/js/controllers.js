@@ -141,7 +141,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AccountCtrl', function($scope, $rootScope, Authentication, Users) {
+.controller('AccountCtrl', function($scope, $rootScope, $state, Authentication, Users) {
 
   Authentication.getLoggedInUser()
   .then(function(user) {
@@ -161,6 +161,7 @@ angular.module('starter.controllers', [])
     .then(function() {
       $scope.user = null;
       $rootScope.$broadcast('loggedOut');
+      $state.go('tab.dash');
     })
     .catch(function(err) {
       console.log(err);
