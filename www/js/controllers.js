@@ -101,6 +101,7 @@ angular.module('starter.controllers', [])
   .then(function(post) {
     $scope.post = post;
     $scope.url = post.url;
+    console.log('URL', $scope.url);
   });
 
   $scope.trustSrc = function(src) {
