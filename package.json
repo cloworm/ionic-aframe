@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "add-to-homescreen": "^3.2.6",
+    "angular-add-to-home-screen": "^0.2.0",
     "angular-file-upload": "^2.3.4",
     "aws-sdk": "^2.6.4",
     "body-parser": "^1.15.2",
