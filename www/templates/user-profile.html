@@ -15,7 +15,7 @@
         <button ng-click="deletePost(post.id)" ng-if="sameUser" class="button button-small button-assertive">Delete This Post</button>
         <p>{{post.createdAt | date : mediumDate}}</p>
         <a href="#/tab/friend/{{post.id}}">
-          <img class="full-image" ng-src="{{post.url}}">
+          <img class="full-image" ng-src="/media/{{post.url}}">
         </a>
         <p>
           {{post.description}}
