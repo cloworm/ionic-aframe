@@ -11,7 +11,11 @@ module.exports = function(sequelize, DataTypes) {
       isUrl: true
     },
     UserId: DataTypes.INTEGER,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    animation: {
+      type: DataTypes.STRING,
+      defaultValue: 'cat'
+    }
   }, {
     classMethods: {
       associate: function(models) {
