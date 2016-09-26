@@ -66,3 +66,12 @@ a {
 .notification {
   color: #ff0000;
 }
+
+.add-to-homescreen {
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+}
