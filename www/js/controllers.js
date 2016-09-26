@@ -23,8 +23,6 @@ angular.module('starter.controllers', [])
     $scope.user = user;
     if (user && !user.username) {
       $state.go('tab.account');
-    } else {
-      $state.go('tab.friends');
     }
   });
 })
