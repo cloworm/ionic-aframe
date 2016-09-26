@@ -15,6 +15,11 @@
           <input type="text" ng-model="user.username" placeholder="{{user.username}}">
         </label>
       </div>
+
+      <h2>Select Your Avatar</h2>
+      <ion-radio ng-model="user.animation" value="cat">Cat</ion-radio>
+      <ion-radio ng-model="user.animation" value="robot">Robot</ion-radio>
+
       <button class="button button-block" ng-click="updateUser(user)">Submit</button>
       <h5 ng-if="updated">Account Updated</h5>
     </form>

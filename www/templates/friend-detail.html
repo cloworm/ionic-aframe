@@ -9,11 +9,11 @@
     <a-assets timeout="10000">
       <img id="pic" crossorigin="anonymous" src="/media/{{url}}">
       <a-asset-item id="cat" src="https://s3-us-west-2.amazonaws.com/ionic-aframe/cat.dae" />
-      <!-- <a-asset-item ng-if="post.avatar" id="robot" src="https://s3-us-west-2.amazonaws.com/ionic-aframe/robot.dae" /> -->
+      <a-asset-item id="robot" src="https://s3-us-west-2.amazonaws.com/ionic-aframe/robot.dae" />
     </a-assets>
     <a-sky src="#pic"></a-sky>
     <a-entity
-      text="text: {{post.title}} by {{post.User.username}}"
+      text="text: {{post.User.animation}} {{post.title}} by {{post.User.username}}"
       position="0 3 -6"
       material="color: #FFF; shader: flat"
       rotation="0 0 0">
@@ -21,7 +21,7 @@
     <a-collada-model ng-if="post.User.animation=='cat'" scale=".75 .75 .75" src="#cat" position="0 0 -5" rotation="0 -15 0">
       <a-animation dur="5000" attribute="rotation" to="0 345 0" repeat="indefinite"></a-animation>
     </a-collada-model>
-    <a-collada-model ng-if="post.User.animation=='robot'" scale=".23 .23 .23" src="#cat" position="0 0 -5" rotation="0 -15 0">
+    <a-collada-model ng-if="post.User.animation=='robot'" scale=".23 .23 .23" src="#robot" position="0 0 -5" rotation="0 -15 0">
       <a-animation dur="5000" attribute="rotation" to="0 345 0" repeat="indefinite"></a-animation>
     </a-collada-model>
   </a-scene>
