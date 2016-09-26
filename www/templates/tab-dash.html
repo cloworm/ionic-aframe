@@ -14,8 +14,15 @@
     <a-scene>
       <a-assets timeout="10000">
         <img id="home" crossorigin="anonymous" src="https://s3-us-west-2.amazonaws.com/ionic-aframe/6979883093_7f0680e9b8_h.jpg">
+        <a-asset-item id="cat" src="img/cat.dae" />
       </a-assets>
+
       <a-sky src="#home"></a-sky>
+      <a-collada-model src="#cat" position="0 0 -5" rotation="0 -15 0">
+        <a-animation dur="5000" attribute="rotation" to="0 345 0" repeat="indefinite"></a-animation>
+        <!-- <a-animation attribute="position" from="0 1 -5" to="0 0 -5" repeat="indefinite"></a-animation> -->
+      </a-collada-model>
+
     </a-scene>
   </ion-content>
 </ion-view>
