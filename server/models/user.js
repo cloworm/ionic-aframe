@@ -26,6 +26,10 @@ module.exports = function(sequelize, DataTypes) {
     googleId: {
       type: DataTypes.STRING,
       unique: true
+    },
+    animation: {
+      type: DataTypes.STRING,
+      defaultValue: 'cat'
     }
   }, {
     classMethods: {
